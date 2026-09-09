@@ -2,1520 +2,579 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Blloshmi Peinture</title>
-
-  <!-- RESPONSIVE MOBILE -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- POLICES -->
+  <meta name="description" content="B. Altin - Entreprise de peinture et rénovation intérieure et extérieure. Devis gratuit et travail soigné.">
+  <title>B. Altin — Peinture & Rénovation</title>
 
   <style>
     :root {
       --blue: #071B4A;
-      --blue-light: #2f72ff;
-      --white: #ffffff;
+      --blue-2: #0c2863;
+      --light-blue: #79aaff;
+      --white: #fff;
       --black: #101828;
       --grey: #667085;
       --background: #f5f7fb;
+      --border: rgba(255,255,255,.16);
     }
 
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; }
+    body { font-family: Arial, Helvetica, sans-serif; color: var(--black); background: #fff; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
 
-    html,
-    body {
-      overflow-x: hidden;
-    }
-
-    img {
-      max-width: 100%;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--black);
-      background: var(--white);
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .container {
-      width: min(1180px, calc(100% - 40px));
-      margin: auto;
-    }
+    .container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
 
     /* =========================
        HEADER
     ========================= */
-
     header {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+      inset: 0 0 auto 0;
       z-index: 100;
-      color: white;
+      color: #fff;
     }
 
     .header {
-      height: 95px;
-      display: flex;
-      align-items: center;
-      gap: 35px;
+      position: relative;
+      min-height: 112px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: start;
+      gap: 24px;
+      padding-top: 18px;
     }
 
-    .logo {
-      width: 250px;
-      height: 120px;
-      margin-top: 45px;
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding-top: 27px;
+    }
+
+    .nav-left { justify-content: flex-start; }
+    .nav-right { justify-content: flex-end; }
+
+    .navigation-link {
+      position: relative;
+      padding: 8px 2px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: rgba(255,255,255,.94);
+    }
+
+    .navigation-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: var(--light-blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: .2s ease;
+    }
+
+    .navigation-link:hover::after,
+    .navigation-link.active::after { transform: scaleX(1); }
+
+    .logo-holder {
+      width: 224px;
+      height: 106px;
+      padding: 5px 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0 0 28px 28px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(255,255,255,.4);
+      box-shadow: 0 14px 35px rgba(0,0,0,.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .logo-holder .logo {
+      width: 100%;
+      height: 100%;
       object-fit: contain;
     }
 
-    .navigation {
-      margin-left: auto;
-      display: flex;
-      gap: 30px;
-    }
-
-    .navigation a {
-      font-size: 14px;
-      font-weight: 700;
-      color: white;
-      transition: 0.2s;
-    }
-
-    .navigation a:hover {
-      color: #9fc0ff;
-    }
-
-    .navigation a {
-      padding: 8px 2px;
-    }
-
     .devis-button {
-      background: white;
-      color: var(--blue);
-      padding: 13px 20px;
-      border-radius: 50px;
-      font-size: 13px;
-      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: #67a0ff;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      transition: .2s ease;
+    }
+
+    .devis-button:hover { transform: translateY(-2px); background: #7eafff; }
+
+    .mobile-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      background: rgba(7,27,74,.82);
+      color: #fff;
+      cursor: pointer;
     }
 
     /* =========================
        HERO
     ========================= */
-
     .hero {
-      min-height: 760px;
+      min-height: 780px;
       position: relative;
       overflow: hidden;
-      color: white;
       display: flex;
       align-items: center;
-
+      color: #fff;
       background:
-        linear-gradient(
-          90deg,
-          rgba(7,27,74,0.98) 0%,
-          rgba(7,27,74,0.90) 42%,
-          rgba(7,27,74,0.48) 75%,
-          rgba(7,27,74,0.35) 100%
-        ),
-        url("https://images.unsplash.com/photo-1562259949-e8e768b2b9b7?auto=format&fit=crop&w=2200&q=90")
-        no-repeat center center;
+        linear-gradient(90deg, rgba(4,20,57,.99) 0%, rgba(7,27,74,.96) 34%, rgba(7,27,74,.72) 62%, rgba(7,27,74,.44) 100%),
+        url("https://images.unsplash.com/photo-1562259949-e8e768b2b9b7?auto=format&fit=crop&w=2200&q=90") center/cover no-repeat;
+    }
 
-      background-size: cover;
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 78% 52%, rgba(111,161,255,.16), transparent 32%);
     }
 
     .hero-content {
-      padding-top: 65px;
-      max-width: 720px;
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      padding-top: 72px;
     }
 
-    .small-title {
+    .small-title,
+    .label {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       color: #9fc0ff;
-      font-size: 11px;
-      font-weight: 800;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      margin-bottom: 20px;
     }
 
-    .small-title::before {
+    .small-title { margin-bottom: 24px; }
+    .small-title::before,
+    .label::before {
       content: "";
-      width: 30px;
-      height: 2px;
+      width: 48px;
+      height: 3px;
+      flex: 0 0 48px;
       background: currentColor;
     }
 
     h1 {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: clamp(48px, 6vw, 80px);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
+      max-width: 800px;
+      font-size: clamp(52px, 6.3vw, 84px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
     }
 
     h1 span {
       display: block;
-      color: #8db4ff;
+      color: #72a6ff;
       font-style: italic;
     }
 
     .hero-text {
-      max-width: 650px;
+      max-width: 680px;
       margin: 28px 0 30px;
-      color: #e2e8f3;
+      color: #e5ebf6;
       font-size: 18px;
-      line-height: 1.7;
+      line-height: 1.65;
     }
 
-    .buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+    .buttons { display: flex; gap: 14px; flex-wrap: wrap; }
 
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 15px 22px;
-      border-radius: 50px;
-      font-size: 14px;
-      font-weight: 800;
-      transition: 0.25s;
-    }
-
-    .button:hover {
-      transform: translateY(-3px);
-    }
-
-    .button-white {
-      background: white;
-      color: var(--blue);
-    }
-
-    .button-transparent {
-      color: white;
-      border: 1px solid rgba(255,255,255,0.35);
-      background: rgba(255,255,255,0.05);
-    }
-
-    .advantages {
-      display: flex;
-      gap: 28px;
-      flex-wrap: wrap;
-      margin-top: 42px;
-    }
-
-    .advantage {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #d9e1ef;
+      gap: 12px;
+      min-height: 54px;
+      padding: 0 26px;
+      border-radius: 999px;
+      border: 1px solid transparent;
       font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: .22s ease;
     }
 
-    .advantage b {
-      color: #8db4ff;
-      font-size: 17px;
-    }
+    .button:hover { transform: translateY(-3px); }
+    .button-white { background: #6fa4ff; color: #fff; }
+    .button-transparent { border-color: rgba(255,255,255,.75); color: #fff; background: rgba(255,255,255,.03); }
+
+    .advantages { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 34px; }
+    .advantage { display: flex; align-items: center; gap: 8px; color: #dbe5f6; font-size: 13px; }
+    .advantage b { color: #82adff; font-size: 17px; }
 
     /* =========================
        SECTIONS
     ========================= */
+    section { padding: 110px 0; }
+    h2 { margin: 15px 0 0; font-size: clamp(38px, 4.5vw, 58px); line-height: 1.04; letter-spacing: -.045em; }
+    h2 span { color: var(--blue); }
 
-    section {
-      padding: 110px 0;
-    }
+    .intro { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: end; }
+    .intro-text { color: var(--grey); font-size: 16px; line-height: 1.8; }
 
-    .label {
-      color: var(--blue);
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.17em;
-    }
+    .services-section,
+    .contact-section { background: var(--background); }
 
-    .label::before {
-      content: "";
-      display: inline-block;
-      width: 28px;
-      height: 2px;
-      background: currentColor;
-      vertical-align: middle;
-      margin-right: 9px;
-    }
+    .section-header { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 45px; }
+    .section-description { max-width: 430px; color: var(--grey); line-height: 1.7; font-size: 14px; }
 
-    h2 {
-      margin: 15px 0 0;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: clamp(38px, 4.5vw, 58px);
-      line-height: 1.05;
-      letter-spacing: -0.045em;
-    }
+    .services { display: grid; grid-template-columns: repeat(4,1fr); gap: 15px; }
+    .service { min-height: 300px; padding: 27px 23px; background: #fff; border: 1px solid #e3e7ef; border-radius: 23px; position: relative; transition: .25s; }
+    .service:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(7,27,74,.12); }
+    .service.blue { background: var(--blue); color: #fff; }
+    .service-number { position: absolute; right: 20px; top: 20px; font-size: 11px; color: #98a2b3; }
+    .service.blue .service-number { color: #8ba5d5; }
+    .service-icon { width: 50px; height: 50px; display: grid; place-items: center; margin: 30px 0 23px; border-radius: 15px; background: #edf3ff; color: var(--blue); font-size: 22px; }
+    .service.blue .service-icon { color: #9fc0ff; background: rgba(255,255,255,.1); }
+    .service h3 { font-size: 19px; margin: 0 0 12px; }
+    .service p { color: var(--grey); font-size: 13px; line-height: 1.7; }
+    .service.blue p { color: #cbd6eb; }
 
-    h2 span {
-      color: var(--blue);
-    }
+    .gallery { display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-template-rows: 260px 260px; gap: 14px; margin-top: 40px; }
+    .photo { position: relative; border-radius: 20px; overflow: hidden; background: #22252a; }
+    .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(7,27,74,.82)); }
+    .photo.big { grid-row: span 2; }
+    .photo-title { position: absolute; left: 20px; bottom: 18px; z-index: 2; color: #fff; font-size: 13px; font-weight: 900; }
 
-    .intro {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 100px;
-      align-items: end;
-    }
+    .about { background: var(--blue); color: #fff; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; }
+    .about-placeholder { min-height: 520px; display: grid; place-items: center; border-radius: 25px; border: 1px dashed rgba(255,255,255,.22); color: #8fa2c4; background: rgba(255,255,255,.04); }
+    .about .label { color: #9fc0ff; }
+    .about h2 span { color: #8db4ff; }
+    .about-text { color: #cbd6eb; line-height: 1.8; margin: 25px 0 35px; }
+    .values { border-top: 1px solid rgba(255,255,255,.12); }
+    .value { display: flex; gap: 20px; padding: 17px 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .value-number { color: #82aaff; font-size: 11px; }
+    .value-text { display: flex; flex-direction: column; gap: 4px; color: #bdc9dd; font-size: 12px; }
+    .value-text strong { color: #fff; font-size: 13px; }
 
-    .intro-text {
-      color: var(--grey);
-      font-size: 16px;
-      line-height: 1.8;
-    }
+    .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; }
+    .contact-description { color: var(--grey); line-height: 1.8; max-width: 530px; margin: 25px 0; }
+    .contact-info { display: grid; gap: 13px; margin-top: 30px; }
+    .contact-info div { background: #fff; border: 1px solid #e3e7ef; border-radius: 15px; padding: 15px 17px; }
+    .contact-info small { display: block; color: #98a2b3; font-size: 9px; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 5px; }
+    .contact-info strong { font-size: 14px; overflow-wrap: anywhere; }
 
-    /* =========================
-       SERVICES
-    ========================= */
+    form { background: #fff; border: 1px solid #e3e7ef; border-radius: 24px; padding: 29px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    label { display: block; font-size: 11px; font-weight: 800; margin-bottom: 15px; }
+    input, textarea, select { width: 100%; margin-top: 7px; padding: 13px 14px; border: 1px solid #d9dee8; border-radius: 11px; background: #fff; outline: none; }
+    input:focus, textarea:focus, select:focus { border-color: var(--blue); }
+    textarea { resize: vertical; min-height: 120px; }
+    form button { width: 100%; border: 0; cursor: pointer; background: var(--blue); color: #fff; }
 
-    .services-section {
-      background: var(--background);
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 40px;
-      margin-bottom: 45px;
-    }
-
-    .section-description {
-      max-width: 430px;
-      color: var(--grey);
-      line-height: 1.7;
-      font-size: 14px;
-    }
-
-    .services {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-    }
-
-    .service {
-      min-height: 300px;
-      padding: 27px 23px;
-      background: white;
-      border: 1px solid #e3e7ef;
-      border-radius: 23px;
-      position: relative;
-      transition: 0.25s;
-    }
-
-    .service:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(7,27,74,0.12);
-    }
-
-    .service.blue {
-      background: var(--blue);
-      color: white;
-    }
-
-    .service-number {
-      position: absolute;
-      right: 20px;
-      top: 20px;
-      font-size: 11px;
-      color: #98a2b3;
-    }
-
-    .service.blue .service-number {
-      color: #8ba5d5;
-    }
-
-    .service-icon {
-      width: 50px;
-      height: 50px;
-      display: grid;
-      place-items: center;
-      margin: 30px 0 23px;
-      border-radius: 15px;
-      background: #edf3ff;
-      color: var(--blue);
-      font-size: 22px;
-    }
-
-    .service.blue .service-icon {
-      color: #9fc0ff;
-      background: rgba(255,255,255,0.1);
-    }
-
-    .service h3 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 19px;
-      margin: 0 0 12px;
-    }
-
-    .service p {
-      color: var(--grey);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .service.blue p {
-      color: #cbd6eb;
-    }
+    footer { background: #051536; color: #fff; padding: 40px 0 20px; }
+    .footer-content { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .footer-content .logo { width: 120px; height: 65px; object-fit: contain; }
+    footer p { color: #aab7ce; font-size: 11px; line-height: 1.6; }
+    .copyright { border-top: 1px solid rgba(255,255,255,.12); margin-top: 30px; padding-top: 17px; color: #687894; font-size: 11px; }
 
     /* =========================
-       REALISATIONS
+       TABLETTE
     ========================= */
-
-    .gallery {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      grid-template-rows: 260px 260px;
-      gap: 14px;
-      margin-top: 40px;
-    }
-
-    .photo {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .photo::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        transparent 45%,
-        rgba(7,27,74,0.82)
-      );
-    }
-
-    .photo.big {
-      grid-row: span 2;
-    }
-
-    .photo-title {
-      position: absolute;
-      left: 20px;
-      bottom: 18px;
-      z-index: 2;
-      color: white;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    /* =========================
-       A PROPOS
-    ========================= */
-
-    .about {
-      background: var(--blue);
-      color: white;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 90px;
-      align-items: center;
-    }
-
-    .about-image img {
-      width: 100%;
-      height: 550px;
-      object-fit: cover;
-      border-radius: 25px;
-      display: block;
-    }
-
-    .about .label {
-      color: #9fc0ff;
-    }
-
-    .about h2 span {
-      color: #8db4ff;
-    }
-
-    .about-text {
-      color: #cbd6eb;
-      line-height: 1.8;
-      margin: 25px 0 35px;
-    }
-
-    .values {
-      border-top: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .value {
-      display: flex;
-      gap: 20px;
-      padding: 17px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .value-number {
-      color: #82aaff;
-      font-size: 11px;
-    }
-
-    .value-text {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      color: #bdc9dd;
-      font-size: 12px;
-    }
-
-    .value-text strong {
-      color: white;
-      font-size: 13px;
-    }
-
-    /* =========================
-       CONTACT
-    ========================= */
-
-    .contact-section {
-      background: var(--background);
-    }
-
-    .contact {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 90px;
-    }
-
-    .contact-description {
-      color: var(--grey);
-      line-height: 1.8;
-      max-width: 530px;
-      margin: 25px 0;
-    }
-
-    .contact-info {
-      display: grid;
-      gap: 13px;
-      margin-top: 30px;
-    }
-
-    .contact-info div {
-      background: white;
-      border: 1px solid #e3e7ef;
-      border-radius: 15px;
-      padding: 15px 17px;
-    }
-
-    .contact-info small {
-      display: block;
-      color: #98a2b3;
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 5px;
-    }
-
-    .contact-info strong {
-      font-size: 14px;
-    }
-
-    form {
-      background: white;
-      border: 1px solid #e3e7ef;
-      border-radius: 24px;
-      padding: 29px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 13px;
-    }
-
-    label {
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      margin-bottom: 15px;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      margin-top: 7px;
-      padding: 13px 14px;
-      border: 1px solid #d9dee8;
-      border-radius: 11px;
-      background: white;
-      outline: none;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: var(--blue);
-    }
-
-    form button {
-      width: 100%;
-      border: 0;
-      cursor: pointer;
-      background: var(--blue);
-      color: white;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      background: #051536;
-      color: white;
-      padding: 40px 0 20px;
-    }
-
-    .footer-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 30px;
-    }
-
-    /* Logo du bas plus petit que celui du header */
-    .footer-content .logo {
-      width: 120px;
-      height: 65px;
-      margin-top: 0;
-    }
-
-    footer p {
-      color: #aab7ce;
-      font-size: 11px;
-      line-height: 1.6;
-    }
-
-    .copyright {
-      border-top: 1px solid rgb(255, 255, 255);
-      margin-top: 30px;
-      padding-top: 17px;
-      color: #687894;
-      font-size: 15px;
+    @media (max-width: 1050px) {
+      .nav-left, .nav-right { gap: 16px; }
+      .navigation-link { font-size: 11px; }
+      .logo-holder { width: 200px; height: 98px; }
+      .services { grid-template-columns: 1fr 1fr; }
     }
 
     /* =========================
        MOBILE
     ========================= */
-
-    .mobile-button {
-      display: none;
-    }
-
-    @media (max-width: 950px) {
-
-      .navigation {
-        display: none;
-      }
-
-      .mobile-button {
-        display: block;
-        margin-left: auto;
-        border: 0;
-        border-radius: 50%;
-        width: 42px;
-        height: 42px;
-        background: white;
-        color: var(--blue);
-        cursor: pointer;
-        font-size: 20px;
-      }
-
-      .intro,
-      .about-grid,
-      .contact {
-        grid-template-columns: 1fr;
-        gap: 50px;
-      }
-
-      .services {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .hero {
-        min-height: 700px;
-      }
-
-      .gallery {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 250px 250px 250px;
-      }
-
-      .photo.big {
-        grid-column: span 2;
-        grid-row: auto;
-      }
-    }
-
-    @media (max-width: 600px) {
-
-      .container {
-        width: calc(100% - 28px);
-      }
+    @media (max-width: 760px) {
+      .container { width: calc(100% - 28px); }
 
       .header {
-        height: 76px;
-        gap: 10px;
+        min-height: 82px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 0;
       }
 
-      .logo {
-        width: 150px;
-        height: 105px;
-        margin-top: 28px;
-        object-fit: contain;
+      .nav-left, .nav-right { display: none; }
+
+      .logo-holder {
+        width: 176px;
+        height: 82px;
+        padding: 4px 7px;
+        border-radius: 0 0 22px 22px;
       }
 
       .mobile-button {
-        width: 44px;
-        height: 44px;
-        flex: 0 0 44px;
-        font-size: 19px;
-      }
-
-      .devis-button {
-        display: none;
-      }
-
-      .hero {
-        min-height: 720px;
-        align-items: flex-start;
-      }
-
-      .hero-content {
-        padding-top: 285px;
-        max-width: 100%;
-      }
-
-      .small-title {
-        gap: 8px;
-        font-size: 10px;
-        letter-spacing: 0.13em;
-        margin-bottom: 16px;
-      }
-
-      .small-title::before {
-        width: 24px;
-      }
-
-      h1 {
-        font-size: clamp(38px, 11vw, 52px);
-        line-height: 1.03;
-        letter-spacing: -0.045em;
-      }
-
-      .hero-text {
-        font-size: 15px;
-        line-height: 1.65;
-        margin: 22px 0 24px;
-      }
-
-      .buttons {
         display: grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .button {
-        width: 100%;
-        min-height: 50px;
-        padding: 14px 18px;
-      }
-
-      .advantages {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-        margin-top: 26px;
-      }
-
-      .advantage {
-        font-size: 13px;
-      }
-
-      section {
-        padding: 68px 0;
-      }
-
-      .label {
-        font-size: 10px;
-        letter-spacing: 0.13em;
-      }
-
-      .label::before {
-        width: 22px;
-        margin-right: 7px;
-      }
-
-      h2 {
-        font-size: clamp(34px, 9vw, 46px);
-        line-height: 1.08;
-      }
-
-      .intro {
-        gap: 28px;
-      }
-
-      .intro-text {
-        font-size: 15px;
-        line-height: 1.7;
-      }
-
-      .section-header {
-        display: block;
-        margin-bottom: 30px;
-      }
-
-      .section-description {
-        margin-top: 15px;
-        font-size: 14px;
-        line-height: 1.65;
-      }
-
-      .services {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .service {
-        min-height: auto;
-        padding: 24px 20px;
-        border-radius: 18px;
-      }
-
-      .service-icon {
-        width: 46px;
-        height: 46px;
-        margin: 18px 0 18px;
-      }
-
-      .service h3 {
+        place-items: center;
+        position: absolute;
+        top: 18px;
+        right: 0;
+        z-index: 5;
         font-size: 18px;
       }
 
-      .service p {
-        font-size: 13px;
-        line-height: 1.65;
+      .hero {
+        min-height: 760px;
+        align-items: flex-start;
+        background-position: 66% center;
       }
 
-      .gallery {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 210px);
-        gap: 10px;
-        margin-top: 30px;
+      .hero::after { background: linear-gradient(180deg, rgba(7,27,74,.1), rgba(7,27,74,.35)); }
+
+      .hero-content {
+        max-width: 100%;
+        padding-top: 275px;
       }
 
-      .photo,
-      .photo.big {
-        grid-column: auto;
-        grid-row: auto;
-        border-radius: 16px;
-      }
+      .small-title { gap: 8px; margin-bottom: 17px; font-size: 9px; letter-spacing: .14em; }
+      .small-title::before { width: 26px; flex-basis: 26px; height: 2px; }
 
-      .photo-title {
-        left: 16px;
-        bottom: 15px;
-        font-size: 13px;
-      }
+      h1 { font-size: clamp(39px, 11.5vw, 58px); line-height: 1; letter-spacing: -.05em; }
+      .hero-text { margin: 21px 0 23px; font-size: 15px; line-height: 1.65; }
+      .buttons { display: grid; grid-template-columns: 1fr; gap: 10px; }
+      .button { width: 100%; min-height: 50px; padding: 0 18px; font-size: 12px; }
+      .advantages { display: grid; grid-template-columns: 1fr; gap: 9px; margin-top: 24px; }
 
-      .about-grid,
-      .contact {
-        gap: 34px;
-      }
+      section { padding: 68px 0; }
+      .intro, .about-grid, .contact { grid-template-columns: 1fr; gap: 30px; }
+      .section-header { display: block; margin-bottom: 30px; }
+      .section-description { margin-top: 15px; font-size: 14px; line-height: 1.65; }
+      h2 { font-size: clamp(34px, 9vw, 46px); }
 
-      .about-image {
-        display: none;
-      }
+      .services { grid-template-columns: 1fr; gap: 12px; }
+      .service { min-height: auto; padding: 24px 20px; border-radius: 18px; }
+      .service-icon { width: 46px; height: 46px; margin: 18px 0; }
 
-      .about-text {
-        margin: 20px 0 28px;
-        line-height: 1.7;
-        font-size: 15px;
-      }
+      .gallery { grid-template-columns: 1fr; grid-template-rows: repeat(5, 210px); gap: 10px; margin-top: 30px; }
+      .photo, .photo.big { grid-column: auto; grid-row: auto; border-radius: 16px; }
 
-      .value {
-        gap: 14px;
-        padding: 15px 0;
-      }
+      .about-placeholder { display: none; }
+      .about-text { margin: 20px 0 28px; font-size: 15px; line-height: 1.7; }
+      .value { gap: 14px; padding: 15px 0; }
 
-      .value-text {
-        font-size: 12px;
-        line-height: 1.5;
-      }
+      .contact-description { font-size: 15px; line-height: 1.7; margin: 20px 0; }
+      .contact-info { margin-top: 24px; gap: 10px; }
+      form { padding: 20px 17px; border-radius: 18px; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      input, textarea, select { font-size: 16px; min-height: 48px; }
 
-      .contact-description {
-        font-size: 15px;
-        line-height: 1.7;
-        margin: 20px 0;
-      }
-
-      .contact-info {
-        margin-top: 24px;
-        gap: 10px;
-      }
-
-      .contact-info div {
-        padding: 14px 15px;
-      }
-
-      .contact-info strong {
-        font-size: 13px;
-        overflow-wrap: anywhere;
-      }
-
-      form {
-        padding: 20px 17px;
-        border-radius: 18px;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      label {
-        font-size: 11px;
-        margin-bottom: 14px;
-      }
-
-      input,
-      textarea,
-      select {
-        font-size: 16px;
-        padding: 13px;
-        min-height: 48px;
-      }
-
-      textarea {
-        min-height: 130px;
-      }
-
-      .footer-content {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 18px;
-        text-align: center;
-      }
-
-      .footer-content .logo {
-        width: 105px;
-        height: 58px;
-        margin-top: 0;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      footer {
-        padding: 34px 0 18px;
-      }
-
-      .copyright {
-        margin-top: 24px;
-        padding-top: 15px;
-        font-size: 11px;
-        line-height: 1.5;
-        text-align: center;
-      }
+      .footer-content { display: grid; grid-template-columns: 1fr; gap: 16px; text-align: center; }
+      .footer-content .logo { width: 105px; height: 58px; margin: 0 auto; }
+      footer { padding: 34px 0 18px; }
+      .copyright { margin-top: 24px; padding-top: 15px; text-align: center; line-height: 1.5; }
     }
   </style>
 </head>
 
 <body>
-
-  <!-- =========================
-       HEADER
-  ========================== -->
-
   <header>
     <div class="container header">
-
-      <a href="#accueil">
-        <img class="logo" src="logo.png" alt="Blloshmi Peinture">
-      </a>
-
-      <!-- IMPORTANT : le fichier doit s'appeler logo.png -->
-<nav class="navigation">
-        <a href="#services">Services</a>
-        <a href="#realisations">Réalisations</a>
-        <a href="#apropos">À propos</a>
-        <a href="#contact">Contact</a>
+      <nav class="nav-left" aria-label="Navigation principale gauche">
+        <a class="navigation-link active" href="#accueil">Accueil</a>
+        <a class="navigation-link" href="#services">Services</a>
+        <a class="navigation-link" href="#realisations">Réalisations</a>
       </nav>
 
-      <a class="devis-button" href="#contact">
-        Demander un devis
+      <a class="logo-holder" href="#accueil" aria-label="Retour à l'accueil">
+        <img class="logo" src="logo.png" alt="B. Altin - Entreprise de peinture">
       </a>
 
-      <button class="mobile-button" id="menuButton">☰</button>
+      <nav class="nav-right" aria-label="Navigation principale droite">
+        <a class="navigation-link" href="#apropos">À propos</a>
+        <a class="navigation-link" href="#contact">Contact</a>
+        <a class="devis-button" href="#contact">Devis gratuit</a>
+      </nav>
 
+      <button class="mobile-button" id="menuButton" aria-label="Ouvrir le menu">☰</button>
     </div>
   </header>
 
-
-  <!-- =========================
-       ACCUEIL
-  ========================== -->
-
   <section class="hero" id="accueil">
-
     <div class="container">
       <div class="hero-content">
-
-        <div class="small-title">
-          Peinture & rénovation
-        </div>
-
+        <div class="small-title">Peinture & rénovation</div>
         <h1>
-          Des murs impeccables.
-          <span>Un travail qui se remarque.</span>
+          Donnez une nouvelle vie
+          <span>à vos espaces.</span>
         </h1>
-
         <p class="hero-text">
-          Un travail soigné, des finitions propres et un accompagnement
-          personnalisé pour donner une nouvelle vie à vos espaces.
+          B. Altin, votre spécialiste en peinture et rénovation intérieure et extérieure.
+          Qualité, précision et finitions impeccables pour tous vos projets.
         </p>
-
         <div class="buttons">
-
-          <a class="button button-white" href="#contact">
-            Obtenir un devis ↗
-          </a>
-
-          <a class="button button-transparent" href="#realisations">
-            Voir les réalisations
-          </a>
-
+          <a class="button button-white" href="#contact">Demander un devis →</a>
+          <a class="button button-transparent" href="#realisations">Voir nos réalisations</a>
         </div>
-
         <div class="advantages">
-
-          <div class="advantage">
-            <b>✓</b>
-            Travail soigné
-          </div>
-
-          <div class="advantage">
-            <b>✓</b>
-            Devis gratuit
-          </div>
-
-          <div class="advantage">
-            <b>✓</b>
-            Conseils personnalisés
-          </div>
-
+          <div class="advantage"><b>✓</b> Travail soigné</div>
+          <div class="advantage"><b>✓</b> Devis gratuit</div>
+          <div class="advantage"><b>✓</b> Conseils personnalisés</div>
         </div>
-
       </div>
     </div>
-
   </section>
-
-
-  <!-- =========================
-       SAVOIR-FAIRE
-  ========================== -->
 
   <section>
-
     <div class="container intro">
-
       <div>
         <div class="label">Notre savoir-faire</div>
-
-        <h2>
-          La peinture, avec
-          <br>
-          <span>le souci du détail.</span>
-        </h2>
+        <h2>La peinture, avec<br><span>le souci du détail.</span></h2>
       </div>
-
       <div class="intro-text">
-
-        <p>
-          Que ce soit pour rafraîchir une pièce, rénover un logement
-          ou remettre en état un extérieur, chaque chantier mérite
-          la même exigence.
-        </p>
-
-        <p>
-          Nous préparons les surfaces avec soin et accordons une
-          attention particulière aux finitions.
-        </p>
-
+        <p>Que ce soit pour rafraîchir une pièce, rénover un logement ou remettre en état un extérieur, chaque chantier mérite la même exigence.</p>
+        <p>Nous préparons les surfaces avec soin et accordons une attention particulière aux finitions.</p>
       </div>
-
     </div>
-
   </section>
 
-
-  <!-- =========================
-       SERVICES
-  ========================== -->
-
   <section class="services-section" id="services">
-
     <div class="container">
-
       <div class="section-header">
-
         <div>
           <div class="label">Ce que nous faisons</div>
           <h2>Nos services</h2>
         </div>
-
-        <div class="section-description">
-          Des prestations adaptées à votre projet, de la préparation
-          des supports jusqu'aux dernières finitions.
-        </div>
-
+        <div class="section-description">Des prestations adaptées à votre projet, de la préparation des supports jusqu'aux dernières finitions.</div>
       </div>
-
 
       <div class="services">
-
-        <article class="service blue">
-
-          <span class="service-number">01</span>
-
-          <div class="service-icon">▱</div>
-
-          <h3>Peinture intérieure</h3>
-
-          <p>
-            Murs, plafonds, boiseries et pièces complètes avec
-            une préparation sérieuse des surfaces.
-          </p>
-
-        </article>
-
-
-        <article class="service">
-
-          <span class="service-number">02</span>
-
-          <div class="service-icon">⌂</div>
-
-          <h3>Façades & extérieur</h3>
-
-          <p>
-            Rafraîchissement et remise en état des surfaces
-            extérieures pour un résultat propre et durable.
-          </p>
-
-        </article>
-
-
-        <article class="service">
-
-          <span class="service-number">03</span>
-
-          <div class="service-icon">✦</div>
-
-          <h3>Rénovation</h3>
-
-          <p>
-            Rebouchage, enduits, préparation et mise en peinture
-            pour transformer vos espaces.
-          </p>
-
-        </article>
-
-
-        <article class="service">
-
-          <span class="service-number">04</span>
-
-          <div class="service-icon">◈</div>
-
-          <h3>Finitions</h3>
-
-          <p>
-            Retouches et finitions minutieuses pour obtenir
-            un rendu homogène et des lignes nettes.
-          </p>
-
-        </article>
-
+        <article class="service blue"><span class="service-number">01</span><div class="service-icon">▱</div><h3>Peinture intérieure</h3><p>Murs, plafonds, boiseries et pièces complètes avec une préparation sérieuse des surfaces.</p></article>
+        <article class="service"><span class="service-number">02</span><div class="service-icon">⌂</div><h3>Façades & extérieur</h3><p>Rafraîchissement et remise en état des surfaces extérieures pour un résultat propre et durable.</p></article>
+        <article class="service"><span class="service-number">03</span><div class="service-icon">✦</div><h3>Rénovation</h3><p>Rebouchage, enduits, préparation et mise en peinture pour transformer vos espaces.</p></article>
+        <article class="service"><span class="service-number">04</span><div class="service-icon">◈</div><h3>Finitions</h3><p>Retouches et finitions minutieuses pour obtenir un rendu homogène et des lignes nettes.</p></article>
       </div>
-
     </div>
-
   </section>
-
-
-  <!-- =========================
-       REALISATIONS
-  ========================== -->
 
   <section id="realisations">
-
     <div class="container">
-
       <div class="section-header">
-
-        <div>
-          <div class="label">Quelques exemples</div>
-          <h2>Nos réalisations</h2>
-        </div>
-
-        <div class="section-description">
-          Cette galerie pourra être remplacée par les vraies photos
-          des chantiers de votre entreprise.
-        </div>
-
+        <div><div class="label">Quelques exemples</div><h2>Nos réalisations</h2></div>
+        <div class="section-description">Cette galerie pourra être remplacée par les vraies photos des chantiers de votre entreprise.</div>
       </div>
-
-
       <div class="gallery">
-
-        <div
-          class="photo big"
-          style="background: #22252A;">
-          <div class="photo-title">Peinture intérieure</div>
-        </div>
-
-        <div
-          class="photo"
-          style="background: #1153bc;">
-          <div class="photo-title">Finitions</div>
-        </div>
-
-        <div
-          class="photo"
-          style="background: #22252A;">
-          <div class="photo-title">Rénovation</div>
-        </div>
-
-        <div
-          class="photo"
-          style="background: #22252A;">
-          <div class="photo-title">Aménagement</div>
-        </div>
-
-        <div
-          class="photo"
-          style="background: #22252A;">
-          <div class="photo-title">Extérieur</div>
-        </div>
-
+        <div class="photo big"><div class="photo-title">Peinture intérieure</div></div>
+        <div class="photo" style="background:#1153bc"><div class="photo-title">Finitions</div></div>
+        <div class="photo"><div class="photo-title">Rénovation</div></div>
+        <div class="photo"><div class="photo-title">Aménagement</div></div>
+        <div class="photo"><div class="photo-title">Extérieur</div></div>
       </div>
-
     </div>
-
   </section>
-
-
-  <!-- =========================
-       A PROPOS
-  ========================== -->
 
   <section class="about" id="apropos">
-
     <div class="container about-grid">
-
-      <div class="about-image">
-
-        <div class="about-placeholder">Photo à ajouter plus tard</div>
-
-      </div>
-
-
+      <div class="about-image"><div class="about-placeholder">Photo à ajouter plus tard</div></div>
       <div>
-
-        <div class="label">
-          À propos
-        </div>
-
-        <h2>
-          Un artisan à votre écoute,
-          <br>
-          <span>du premier coup de pinceau.</span>
-        </h2>
-
-        <p class="about-text">
-          Chaque projet commence par une écoute attentive de vos besoins.
-          L'objectif est simple : vous proposer une solution claire,
-          un travail propre et un résultat à la hauteur de vos attentes.
-        </p>
-
-
+        <div class="label">À propos</div>
+        <h2>Un artisan à votre écoute,<br><span>du premier coup de pinceau.</span></h2>
+        <p class="about-text">Chaque projet commence par une écoute attentive de vos besoins. L'objectif est simple : vous proposer une solution claire, un travail propre et un résultat à la hauteur de vos attentes.</p>
         <div class="values">
-
-          <div class="value">
-            <div class="value-number">01</div>
-            <div class="value-text">
-              <strong>Écoute</strong>
-              Un échange simple et transparent.
-            </div>
-          </div>
-
-          <div class="value">
-            <div class="value-number">02</div>
-            <div class="value-text">
-              <strong>Précision</strong>
-              Une préparation sérieuse des surfaces.
-            </div>
-          </div>
-
-          <div class="value">
-            <div class="value-number">03</div>
-            <div class="value-text">
-              <strong>Propreté</strong>
-              Un chantier respectueux de votre intérieur.
-            </div>
-          </div>
-
+          <div class="value"><div class="value-number">01</div><div class="value-text"><strong>Écoute</strong>Un échange simple et transparent.</div></div>
+          <div class="value"><div class="value-number">02</div><div class="value-text"><strong>Précision</strong>Une préparation sérieuse des surfaces.</div></div>
+          <div class="value"><div class="value-number">03</div><div class="value-text"><strong>Propreté</strong>Un chantier respectueux de votre intérieur.</div></div>
         </div>
-
       </div>
-
     </div>
-
   </section>
-
-
-  <!-- =========================
-       CONTACT
-  ========================== -->
 
   <section class="contact-section" id="contact">
-
     <div class="container contact">
-
       <div>
-
-        <div class="label">
-          Parlons de votre projet
-        </div>
-
-        <h2>
-          Besoin d'un devis ?
-          <br>
-          <span>On en parle.</span>
-        </h2>
-
-        <p class="contact-description">
-          Décrivez rapidement votre projet. Nous pourrons ensuite
-          échanger sur vos besoins et établir un devis.
-        </p>
-
-
+        <div class="label">Parlons de votre projet</div>
+        <h2>Besoin d'un devis ?<br><span>On en parle.</span></h2>
+        <p class="contact-description">Décrivez rapidement votre projet. Nous pourrons ensuite échanger sur vos besoins et établir un devis.</p>
         <div class="contact-info">
-
-          <div>
-            <small>Téléphone</small>
-            <strong>07 53 72 12 16</strong>
-          </div>
-
-          <div>
-            <small>E-mail</small>
-            <strong>ablloshmi.peinture@gmail.com</strong>
-          </div>
-
-          <div>
-            <small>Zone d'intervention</small>
-            <strong>Rhône Alpes</strong>
-          </div>
-
+          <div><small>Téléphone</small><strong>07 53 72 12 16</strong></div>
+          <div><small>E-mail</small><strong>ablloshmi.peinture@gmail.com</strong></div>
+          <div><small>Zone d'intervention</small><strong>Rhône Alpes</strong></div>
         </div>
-
       </div>
 
-
       <form id="contactForm">
-
         <div class="form-row">
-
-          <label>
-            Nom
-            <input type="text" name="nom" placeholder="Votre nom" required>
-          </label>
-
-          <label>
-            Téléphone
-            <input type="tel" name="telephone" placeholder="06..." required>
-          </label>
-
+          <label>Nom<input type="text" name="nom" placeholder="Votre nom" required></label>
+          <label>Téléphone<input type="tel" name="telephone" placeholder="06..." required></label>
         </div>
-
-
-        <label>
-          E-mail
-          <input type="email" name="email" placeholder="vous@exemple.fr">
+        <label>E-mail<input type="email" name="email" placeholder="vous@exemple.fr"></label>
+        <label>Type de projet
+          <select name="projet"><option>Peinture intérieure</option><option>Façade / extérieur</option><option>Rénovation</option><option>Autre</option></select>
         </label>
-
-
-        <label>
-          Type de projet
-
-          <select name="projet">
-
-            <option>Peinture intérieure</option>
-            <option>Façade / extérieur</option>
-            <option>Rénovation</option>
-            <option>Autre</option>
-
-          </select>
-
-        </label>
-
-
-        <label>
-          Votre message
-
-          <textarea
-            name="message"
-            placeholder="Surface, ville, travaux souhaités..."></textarea>
-
-        </label>
-
-
-        <button class="button" type="submit">
-          Préparer ma demande ↗
-        </button>
-
-        <p id="formMessage" style="font-size:11px;color:#98a2b3;">
-          Votre messagerie s'ouvrira pour envoyer la demande.
-        </p>
-
+        <label>Votre message<textarea name="message" placeholder="Surface, ville, travaux souhaités..."></textarea></label>
+        <button class="button" type="submit">Préparer ma demande ↗</button>
+        <p id="formMessage" style="font-size:11px;color:#98a2b3;">Votre messagerie s'ouvrira pour envoyer la demande.</p>
       </form>
-
     </div>
-
   </section>
 
-
-  <!-- =========================
-       FOOTER
-  ========================== -->
-
   <footer>
-
     <div class="container footer-content">
-
-      <a href="#accueil">
-        <img class="logo" src="logo.png" alt="Blloshmi Peinture">
-      </a>
-
-      <p>
-        Peinture & rénovation<br>
-        Qualité • Propreté • Finitions
-      </p>
-
-      <a href="#accueil">
-        ↑ Retour en haut
-      </a>
-
+      <a href="#accueil"><img class="logo" src="logo.png" alt="B. Altin"></a>
+      <p>Peinture & rénovation<br>Qualité • Propreté • Finitions</p>
+      <a href="#accueil">↑ Retour en haut</a>
     </div>
-
-    <div class="container copyright">
-      © <span id="year"></span> AB Peinture — Tous droits réservés. Site By Creation Logo Lyon
-    </div>
-
+    <div class="container copyright">© <span id="year"></span> AB Peinture — Tous droits réservés. Site By Creation Logo Lyon</div>
   </footer>
 
-
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
-
   <script>
-
-    /* Année automatique */
     document.getElementById("year").textContent = new Date().getFullYear();
 
-
-    /* Menu mobile */
     const menuButton = document.getElementById("menuButton");
-    const navigation = document.querySelector(".navigation");
-
-    menuButton.addEventListener("click", function() {
-
-      if (navigation.style.display === "flex") {
-
-        navigation.style.display = "none";
-
-      } else {
-
-        navigation.style.display = "flex";
-        navigation.style.position = "absolute";
-        navigation.style.top = "75px";
-        navigation.style.left = "14px";
-        navigation.style.right = "14px";
-        navigation.style.padding = "18px";
-        navigation.style.borderRadius = "16px";
-        navigation.style.background = "#071B4A";
-        navigation.style.flexDirection = "column";
-        navigation.style.gap = "6px";
-
-      }
-
+    menuButton.addEventListener("click", function () {
+      let menu = document.getElementById("mobileMenu");
+      if (menu) { menu.remove(); return; }
+      menu = document.createElement("div");
+      menu.id = "mobileMenu";
+      menu.style.cssText = "position:absolute;top:76px;left:14px;right:14px;padding:14px;border-radius:18px;background:#071B4A;box-shadow:0 18px 40px rgba(0,0,0,.25);display:grid;gap:4px;z-index:200;";
+      menu.innerHTML = '<a href="#accueil" style="padding:13px;color:#fff;font-weight:800;">Accueil</a><a href="#services" style="padding:13px;color:#fff;font-weight:800;">Services</a><a href="#realisations" style="padding:13px;color:#fff;font-weight:800;">Réalisations</a><a href="#apropos" style="padding:13px;color:#fff;font-weight:800;">À propos</a><a href="#contact" style="padding:13px;color:#fff;font-weight:800;">Contact</a>';
+      document.querySelector(".header").appendChild(menu);
+      menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => menu.remove()));
     });
 
-
-    /* Formulaire */
     document.getElementById("contactForm").addEventListener("submit", function(event) {
-
       event.preventDefault();
-
       const form = new FormData(this);
-
-      const nom = form.get("nom");
-      const telephone = form.get("telephone");
-      const email = form.get("email");
-      const projet = form.get("projet");
-      const message = form.get("message");
-
-      const sujet = "Demande de devis - " + nom;
-
-      const contenu =
-        "Nom : " + nom + "\\n" +
-        "Téléphone : " + telephone + "\\n" +
-        "E-mail : " + email + "\\n" +
-        "Projet : " + projet + "\\n\\n" +
-        "Message : " + message;
-
-      window.location.href =
-        "mailto:contact@blloshmi-peinture.fr" +
-        "?subject=" + encodeURIComponent(sujet) +
-        "&body=" + encodeURIComponent(contenu);
-
-      document.getElementById("formMessage").textContent =
-        "Votre messagerie va s'ouvrir pour envoyer la demande.";
-
+      const sujet = "Demande de devis - " + form.get("nom");
+      const contenu = "Nom : " + form.get("nom") + "\n" +
+        "Téléphone : " + form.get("telephone") + "\n" +
+        "E-mail : " + form.get("email") + "\n" +
+        "Projet : " + form.get("projet") + "\n\n" +
+        "Message : " + form.get("message");
+      window.location.href = "mailto:contact@blloshmi-peinture.fr?subject=" + encodeURIComponent(sujet) + "&body=" + encodeURIComponent(contenu);
     });
-
   </script>
-
 </body>
 </html>
