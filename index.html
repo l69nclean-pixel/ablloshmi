@@ -15,13 +15,22 @@
       --blue-light: #2f72ff;
       --white: #ffffff;
       --black: #101828;
-      --grey: #667085
+      --grey: #667085;
       --background: #f5f7fb;
     }
 
     * {
       box-sizing: border-box;
       scroll-behavior: smooth;
+    }
+
+    html,
+    body {
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
     }
 
     body {
@@ -83,6 +92,10 @@
 
     .navigation a:hover {
       color: #9fc0ff;
+    }
+
+    .navigation a {
+      padding: 8px 2px;
     }
 
     .devis-button {
@@ -590,8 +603,11 @@
       gap: 30px;
     }
 
-    footer .logo {
-      width: 100px;
+    /* Logo du bas plus petit que celui du header */
+    .footer-content .logo {
+      width: 120px;
+      height: 65px;
+      margin-top: 0;
     }
 
     footer p {
@@ -668,12 +684,22 @@
       }
 
       .header {
-        height: 78px;
+        height: 76px;
+        gap: 10px;
       }
 
       .logo {
-        width: 188px;
-        height: 162px;
+        width: 150px;
+        height: 105px;
+        margin-top: 28px;
+        object-fit: contain;
+      }
+
+      .mobile-button {
+        width: 44px;
+        height: 44px;
+        flex: 0 0 44px;
+        font-size: 19px;
       }
 
       .devis-button {
@@ -681,61 +707,243 @@
       }
 
       .hero {
-        min-height: 680px;
+        min-height: 720px;
+        align-items: flex-start;
       }
 
       .hero-content {
-        padding-top: 35px;
+        padding-top: 285px;
+        max-width: 100%;
+      }
+
+      .small-title {
+        gap: 8px;
+        font-size: 10px;
+        letter-spacing: 0.13em;
+        margin-bottom: 16px;
+      }
+
+      .small-title::before {
+        width: 24px;
       }
 
       h1 {
-        font-size: 47px;
+        font-size: clamp(38px, 11vw, 52px);
+        line-height: 1.03;
+        letter-spacing: -0.045em;
       }
 
       .hero-text {
         font-size: 15px;
+        line-height: 1.65;
+        margin: 22px 0 24px;
+      }
+
+      .buttons {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .button {
+        width: 100%;
+        min-height: 50px;
+        padding: 14px 18px;
+      }
+
+      .advantages {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 26px;
+      }
+
+      .advantage {
+        font-size: 13px;
       }
 
       section {
-        padding: 78px 0;
+        padding: 68px 0;
+      }
+
+      .label {
+        font-size: 10px;
+        letter-spacing: 0.13em;
+      }
+
+      .label::before {
+        width: 22px;
+        margin-right: 7px;
+      }
+
+      h2 {
+        font-size: clamp(34px, 9vw, 46px);
+        line-height: 1.08;
+      }
+
+      .intro {
+        gap: 28px;
+      }
+
+      .intro-text {
+        font-size: 15px;
+        line-height: 1.7;
       }
 
       .section-header {
         display: block;
+        margin-bottom: 30px;
       }
 
       .section-description {
-        margin-top: 16px;
+        margin-top: 15px;
+        font-size: 14px;
+        line-height: 1.65;
       }
 
       .services {
         grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .service {
+        min-height: auto;
+        padding: 24px 20px;
+        border-radius: 18px;
+      }
+
+      .service-icon {
+        width: 46px;
+        height: 46px;
+        margin: 18px 0 18px;
+      }
+
+      .service h3 {
+        font-size: 18px;
+      }
+
+      .service p {
+        font-size: 13px;
+        line-height: 1.65;
       }
 
       .gallery {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 230px);
+        grid-template-rows: repeat(5, 210px);
+        gap: 10px;
+        margin-top: 30px;
       }
 
+      .photo,
       .photo.big {
         grid-column: auto;
+        grid-row: auto;
+        border-radius: 16px;
       }
 
-      .about-image img {
-        height: 400px;
+      .photo-title {
+        left: 16px;
+        bottom: 15px;
+        font-size: 13px;
+      }
+
+      .about-grid,
+      .contact {
+        gap: 34px;
+      }
+
+      .about-image {
+        display: none;
+      }
+
+      .about-text {
+        margin: 20px 0 28px;
+        line-height: 1.7;
+        font-size: 15px;
+      }
+
+      .value {
+        gap: 14px;
+        padding: 15px 0;
+      }
+
+      .value-text {
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .contact-description {
+        font-size: 15px;
+        line-height: 1.7;
+        margin: 20px 0;
+      }
+
+      .contact-info {
+        margin-top: 24px;
+        gap: 10px;
+      }
+
+      .contact-info div {
+        padding: 14px 15px;
+      }
+
+      .contact-info strong {
+        font-size: 13px;
+        overflow-wrap: anywhere;
+      }
+
+      form {
+        padding: 20px 17px;
+        border-radius: 18px;
       }
 
       .form-row {
         grid-template-columns: 1fr;
+        gap: 0;
       }
 
-      form {
-        padding: 21px;
+      label {
+        font-size: 11px;
+        margin-bottom: 14px;
+      }
+
+      input,
+      textarea,
+      select {
+        font-size: 16px;
+        padding: 13px;
+        min-height: 48px;
+      }
+
+      textarea {
+        min-height: 130px;
       }
 
       .footer-content {
         display: grid;
         grid-template-columns: 1fr;
+        gap: 18px;
+        text-align: center;
+      }
+
+      .footer-content .logo {
+        width: 105px;
+        height: 58px;
+        margin-top: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      footer {
+        padding: 34px 0 18px;
+      }
+
+      .copyright {
+        margin-top: 24px;
+        padding-top: 15px;
+        font-size: 11px;
+        line-height: 1.5;
+        text-align: center;
       }
     }
   </style>
@@ -750,12 +958,12 @@
   <header>
     <div class="container header">
 
-      <!-- IMPORTANT : le fichier doit s'appeler logo.png -->
       <a href="#accueil">
         <img class="logo" src="logo.png" alt="Blloshmi Peinture">
       </a>
 
-      <nav class="navigation">
+      <!-- IMPORTANT : le fichier doit s'appeler logo.png -->
+<nav class="navigation">
         <a href="#services">Services</a>
         <a href="#realisations">Réalisations</a>
         <a href="#apropos">À propos</a>
@@ -1131,7 +1339,7 @@
 
           <div>
             <small>E-mail</small>
-            <strong>ablloshli.peinture@gmail.com</strong>
+            <strong>ablloshmi.peinture@gmail.com</strong>
           </div>
 
           <div>
@@ -1264,11 +1472,11 @@
         navigation.style.top = "75px";
         navigation.style.left = "14px";
         navigation.style.right = "14px";
-        navigation.style.padding = "15px";
-        navigation.style.borderRadius = "15px";
+        navigation.style.padding = "18px";
+        navigation.style.borderRadius = "16px";
         navigation.style.background = "#071B4A";
         navigation.style.flexDirection = "column";
-        navigation.style.gap = "15px";
+        navigation.style.gap = "6px";
 
       }
 
